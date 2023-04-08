@@ -6,6 +6,7 @@ import About from './pages/About';
 import Products from './pages/Products';
 import Error from './pages/Error';
 import SharedLayout from './components/SharedLayout';
+import SharedLayout2 from './components/SharedLayout2';
 import Login from './pages/Login';
 import SingleProduct from './pages/SingleProduct';
 import Dashboard from './pages/Dashboard';
@@ -20,7 +21,10 @@ function App() {
         <Route path='/' element={<SharedLayout />}>
           <Route index element={<Home />} />
           <Route path='about' element={<About />} />
-          <Route path='products' element={<Products />} />
+          <Route path='products/' element={<SharedLayout2 />}>
+            <Route index element={<Products />} />
+            <Route path=':id' element={<SingleProduct />} />
+          </Route>
           <Route path='login' element={<Login setUser={setUser} />} />
           <Route
             path='dashboard'
@@ -30,7 +34,6 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path='products/:id' element={<SingleProduct />} />
           <Route path='*' element={<Error />} />
         </Route>
       </Routes>
