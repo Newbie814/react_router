@@ -1,10 +1,40 @@
 import { useState } from 'react';
-const Login = () => {
+import { useNavigate } from 'react-router-dom';
+const Login = ({ setUser }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
 
+  const navigate = useNavigate();
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (name && email) {
+  //     setName(name);
+  //     setEmail(email);
+  //     const user = {
+  //       name: name,
+  //       email: email,
+  //     };
+  //     setUser(user);
+  //     console.log(user);
+  //     setName('');
+  //     setEmail('');
+  //   }
+  //   if (!name || !email) {
+  //     alert('Please enter your name and/or email address');
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!name || !email) {
+      alert('Please enter your name and/or email address');
+      return;
+    }
+    setUser({ name: name, email: email });
+    setName('');
+    setEmail('');
+    navigate('/dashboard');
   };
 
   return (
